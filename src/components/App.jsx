@@ -20,6 +20,16 @@ export class App extends React.Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const savedContactsInLS = localStorage.getItem('contacts');
+    if (savedContactsInLS) {
+      this.setState({
+        contacts: JSON.parse(savedContactsInLS),
+      });
+    }
+  }
+
   handleChange = event => {
     this.setState({ name: event.target.value });
   };
@@ -46,7 +56,7 @@ export class App extends React.Component {
     const contacts = this.state.contacts;
     const filter = this.state.filter;
     const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter),
+      contact.name.toLowerCase().includes(filter)
     );
     return (
       <>
